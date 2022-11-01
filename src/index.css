@@ -34,8 +34,8 @@
 
 .form {
   box-shadow: 5px 5px 15px rgb(0, 0, 0);
+  
   color: white;
-  width: 400px;
   min-height: 500px;
   border-radius: 15px;
   display: flex;
@@ -111,7 +111,7 @@ input {
 .btn-submit {
   width: 100px;
   height: 30px;
-  margin-top: 30px; 
+  margin-top: 30px;
   cursor: pointer;
   border-radius: 10px;
   border: none;
@@ -133,12 +133,9 @@ input {
   }
 }
 
-
-
 .form-control label {
- padding: 0px 20px;
+  padding: 0px 20px;
 }
-
 
 #city {
   width: 100px;
@@ -146,4 +143,45 @@ input {
   border-radius: 15px;
   cursor: pointer;
   padding: 0px 10px;
+}
+
+
+.container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+
+.first {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-right: 2px solid rgb(255, 255, 255);
+  margin: 0px 10px;
+}
+
+.form-control {
+  margin: 20px 0px;
+}
+
+.second{
+  display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0px 10px;
+}
+
+#area {
+  margin: 40px 0px;
+  text-align: center;
+}
+
+#textarea {
+  margin-top: 20px;
+  width: 100%;
+  min-height: 120px;
+
 }

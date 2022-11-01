@@ -4,10 +4,10 @@ import * as Yup from 'yup';
 import 'yup-phone';
 //Components
 import FormikControler from './FormikControler';
-import { cities, gender, checkboxOptions } from './Data';
+import { gender, checkboxOptions } from './Data';
+import { cities } from './Data/cities';
 
 function RegistrationForm() {
-
   const initialValues = {
     fullName: '',
     email: '',
@@ -18,8 +18,11 @@ function RegistrationForm() {
     date: null,
     phone: '',
     city: '',
+    address: '',
+    textarea: ''
   };
 
+  
   const validationSchema = Yup.object({
     fullName: Yup.string().required('Required'),
     email: Yup.string().email('Invalid email format ').required('Required'),
@@ -41,12 +44,12 @@ function RegistrationForm() {
         /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/,
         'Phone number is not valid'
       ),
+      address: Yup.string().required('Required'),
+      textarea: Yup.string().required('Required')
   });
 
   const onSubmit = (values) => {
-    console.log('Saved data:' ,JSON.parse(JSON.stringify(values))
-    );
-    
+    console.log('Saved data:', JSON.parse(JSON.stringify(values)));
   };
 
   return (
@@ -56,69 +59,90 @@ function RegistrationForm() {
       onSubmit={onSubmit}
     >
       {(formik) => {
-        
         return (
           <Form className="form">
-            <FormikControler
-              type="text"
-              control="input"
-              name="fullName"
-              label="Full name"
-            />
+            <div className="container">
+              <div className="first">
+                <FormikControler
+                  type="text"
+                  control="input"
+                  name="fullName"
+                  label="Full name"
+                />
 
-            <FormikControler
-              type="email"
-              control="input"
-              name="email"
-              label="Email"
-            />
+                <FormikControler
+                  type="email"
+                  control="input"
+                  name="email"
+                  label="Email"
+                />
 
-            <FormikControler
-              type="password"
-              control="input"
-              name="password"
-              label="Password"
-            />
+                <FormikControler
+                  type="password"
+                  control="input"
+                  name="password"
+                  label="Password"
+                />
 
-            <FormikControler
-              type="password"
-              control="input"
-              name="confirmPassword"
-              label="Confirm password"
-            />
+                <FormikControler
+                  type="password"
+                  control="input"
+                  name="confirmPassword"
+                  label="Confirm password"
+                />
 
-            <FormikControler
-              control="input"
-              type="number"
-              name="phone"
-              label="Phone"
-            />
+                <FormikControler
+                  control="input"
+                  type="number"
+                  name="phone"
+                  label="Phone"
+                />
 
-            <FormikControler
-              control="radio"
-              name="gender"
-              label="Gender"
-              options={gender}
-            />
-            <FormikControler 
-            control="date" 
-            name="date" 
-            label="Birthday" />
+                <FormikControler
+                  control="radio"
+                  name="gender"
+                  label="Gender"
+                  options={gender}
+                />
+                <FormikControler control="date" name="date" label="Birthday" />
 
-            <FormikControler
-              control="checkbox"
-              name="skills"
-              label="Skills"
-              options={checkboxOptions}
-            />
+                <FormikControler
+                  control="checkbox"
+                  name="skills"
+                  label="Skills"
+                  options={checkboxOptions}
+                />
 
-            <FormikControler
-              control="select"
-              name="city"
-              label="City"
-              options={cities}
-            />
+              </div>
 
+
+
+
+              <div className="second">
+                <h1>Address</h1>
+                <FormikControler
+                  type="text"
+                  control="input"
+                  name="address"
+                  label="Address"
+                />
+
+                
+                <FormikControler
+                  control="select"
+                  name="city"
+                  label="City"
+                  options={cities}
+                />
+
+                <FormikControler 
+                control="textarea" 
+                label="Tell us how can we help you?"
+                 name="textarea" />
+            
+
+              </div>
+            </div>
             <button
               className="btn-submit"
               type="submit"

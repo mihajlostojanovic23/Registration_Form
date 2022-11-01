@@ -9,8 +9,8 @@ function Select(props) {
       <label htmlFor={name}>{label}</label>
       <Field as="select" id={name} name={name} {...rest}>
         {options.map((option) => (
-          <option key={option.value} value={option.value}>
-            {option.key}
+          <option key={option._id} value={option.city}>
+            {option.city}
           </option>
         ))}
       </Field>
