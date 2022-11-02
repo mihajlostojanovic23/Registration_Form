@@ -1,13 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
 import 'yup-phone';
+
 //Components
 import FormikControler from './FormikControler';
 import { gender, checkboxOptions } from './Data';
 import { cities } from './Data/cities';
+import Show_Info from './Show_info/Show_Info';
+
+
 
 function RegistrationForm() {
+
+const [values, setValues] = useState([])
+
   const initialValues = {
     fullName: '',
     email: '',
@@ -19,10 +26,9 @@ function RegistrationForm() {
     phone: '',
     city: '',
     address: '',
-    textarea: ''
+    textarea: '',
   };
 
-  
   const validationSchema = Yup.object({
     fullName: Yup.string().required('Required'),
     email: Yup.string().email('Invalid email format ').required('Required'),
@@ -37,6 +43,7 @@ function RegistrationForm() {
       .required('Required'),
     gender: Yup.string().required('Required'),
     date: Yup.date().required('Required').nullable(),
+    skills: Yup.array().required('Required'),
     city: Yup.string().required('Required'),
     phone: Yup.string()
       .required('Invalid phone number')
@@ -44,15 +51,17 @@ function RegistrationForm() {
         /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/,
         'Phone number is not valid'
       ),
-      address: Yup.string().required('Required'),
-      textarea: Yup.string().required('Required')
+    address: Yup.string().required('Required'),
+    textarea: Yup.string().required('Required'),
   });
 
   const onSubmit = (values) => {
+    setValues([values])
     console.log('Saved data:', JSON.parse(JSON.stringify(values)));
   };
 
   return (
+    <div>
     <Formik
       initialValues={initialValues}
       validationSchema={validationSchema}
@@ -112,11 +121,7 @@ function RegistrationForm() {
                   label="Skills"
                   options={checkboxOptions}
                 />
-
               </div>
-
-
-
 
               <div className="second">
                 <h1>Address</h1>
@@ -127,7 +132,6 @@ function RegistrationForm() {
                   label="Address"
                 />
 
-                
                 <FormikControler
                   control="select"
                   name="city"
@@ -135,12 +139,11 @@ function RegistrationForm() {
                   options={cities}
                 />
 
-                <FormikControler 
-                control="textarea" 
-                label="Tell us how can we help you?"
-                 name="textarea" />
-            
-
+                <FormikControler
+                  control="textarea"
+                  label="Tell us how can we help you?"
+                  name="textarea"
+                />
               </div>
             </div>
             <button
@@ -154,6 +157,8 @@ function RegistrationForm() {
         );
       }}
     </Formik>
+      {values.length !==0 && <Show_Info values={values} setValues={setValues}/>}
+    </div>
   );
 }
 
